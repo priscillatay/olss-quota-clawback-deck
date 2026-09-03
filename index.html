@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Keynote Presentation Deck Preview</title>
+<style>
+  :root {
+    --bg-app: #1e1e1e;
+    --bg-slide: #ffffff;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent-blue: #0071e3;
+    --accent-blue-bg: #f0f7ff;
+    --accent-red-bg: #fff1f0;
+    --card-bg: #f5f5f7;
+    --border-color: #d2d2d7;
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--bg-app);
+    font-family: var(--font-stack);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    color: var(--text-primary);
+  }
+  .slide-container {
+    width: 1000px;
+    height: 562.5px; /* 16:9 ratio */
+    background: var(--bg-slide);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-header {
+    margin-bottom: 24px;
+  }
+  .slide-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    margin-bottom: 6px;
+  }
+  .slide-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .slide-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .slide-number {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  @media print {
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    body {
+      background: #fff;
+      padding: 0;
+      gap: 0;
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      box-shadow: none;
+      border-radius: 0;
+      page-break-after: always;
+      break-after: page;
+      transform: none;
+    }
+  }
+
+  /* Slide 1 - Title */
+  .title-slide {
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 80px;
+  }
+  .title-main {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .title-sub {
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: 750px;
+    margin-bottom: 40px;
+  }
+  .title-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-blue);
+    background: var(--accent-blue-bg);
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,113,227,0.15);
+  }
+
+  /* Executive Banner */
+  .banner {
+    background: var(--accent-blue-bg);
+    border: 1px solid rgba(0,113,227,0.15);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-primary);
+  }
+  .banner strong { color: var(--accent-blue); }
+
+  /* 3 Column Grid */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    flex: 1;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .card-highlight {
+    background: var(--accent-blue-bg);
+    border: 1px solid rgba(0,113,227,0.2);
+  }
+  .card-alert {
+    background: var(--accent-red-bg);
+    border: 1px solid rgba(235,87,87,0.2);
+  }
+  .card-header {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+  }
+  .card ul {
+    list-style: none;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #333336;
+  }
+  .card li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 14px;
+  }
+  .card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-weight: bold;
+  }
+
+  /* 3 Step Flow */
+  .step-flow {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    align-items: center;
+    flex: 1;
+  }
+  .arrow {
+    text-align: center;
+    font-size: 22px;
+    color: var(--text-secondary);
+  }
+
+  /* 2 Column Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex: 1;
+  }
+
+  /* Checklist */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 24px;
+    flex: 1;
+  }
+  .check-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .checkbox-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .check-text h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .check-text p {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+  <!-- SLIDE 1 -->
+  <div class="slide-container title-slide">
+    <div class="title-main">OLSS Cancellation Quota &amp; Clawback</div>
+    <div class="title-sub">Mitigating Customer Lockouts &amp; Escalation Surges During NPI Launch Windows</div>
+    <div class="title-meta">
+      <span>Target Window: NPI Launch Readiness</span>
+      <span>•</span>
+      <span>Decision Review</span>
+    </div>
+    <div class="slide-number">01</div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide-container">
+    <div class="slide-header">
+      <div class="slide-tag">Executive Summary</div>
+      <div class="slide-title">OLSS Quota &amp; Clawback Strategy for NPI</div>
+      <div class="slide-subtitle">Balancing launch purchase controls with customer modification flexibility</div>
+    </div>
+    <div class="banner">
+      <strong>Core Objective:</strong> Prevent legitimate customer lockouts during peak NPI launches by temporarily raising purchase quota limits and establishing rapid clawback reconciliation.
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header">1. The Problem</div>
+        <div class="card-title">Quota Lockout Post-Cancel</div>
+        <ul>
+          <li>OLSS cancellations don't restore quota in real-time.</li>
+          <li>Replacement/modified orders trigger limit violations.</li>
+          <li>Genuine buyers locked out during peak launch hours.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header">2. Business Impact</div>
+        <div class="card-title">Friction &amp; Escalations</div>
+        <ul>
+          <li><strong>Customer CX:</strong> Checkout failures for high-intent buyers.</li>
+          <li><strong>Ops Burden:</strong> Surge in calls to Frontline and fraud call queues.</li>
+          <li><strong>Revenue Risk:</strong> Cart abandonment, lost launch sales.</li>
+        </ul>
+      </div>
+      <div class="card card-highlight">
+        <div class="card-header" style="color:var(--accent-blue)">3. Proposal &amp; Ask</div>
+        <div class="card-title">Quota Buffer &amp; SLAs</div>
+        <ul>
+          <li><strong>Temporary Buffer:</strong> Raise per-customer quota (N &rarr; N+X) for NPI SKUs.</li>
+          <li><strong>Clawback Cadence:</strong> Formalize rapid daily sync for cancelled units.</li>
+          <li><strong>Sign-Off:</strong> Approval needed before configuration freeze.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-number">02</div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide-container">
+    <div class="slide-header">
+      <div class="slide-tag">Current State Analysis</div>
+      <div class="slide-title">Why Customers Get Locked Out</div>
+      <div class="slide-subtitle">Step-by-step lifecycle of an OLSS cancellation and quota consumption</div>
+    </div>
+    <div class="step-flow">
+      <div class="card">
+        <div class="card-header">Step 1</div>
+        <div class="card-title">Order Placement</div>
+        <ul>
+          <li>Customer purchases up to allowed product quantity limit.</li>
+          <li>System immediately decrements and locks customer quota balance.</li>
+          <li>Account hits max allocation.</li>
+        </ul>
+      </div>
+      <div class="arrow">&rarr;</div>
+      <div class="card card-alert">
+        <div class="card-header" style="color:#d32f2f">Step 2: The Gap</div>
+        <div class="card-title">OLSS Cancellation</div>
+        <ul>
+          <li>Customer self-cancels to modify spec, color, or payment.</li>
+          <li><strong>System Lag:</strong> Quota is not clawed back in real-time.</li>
+          <li>Account quota remains exhausted.</li>
+        </ul>
+      </div>
+      <div class="arrow">&rarr;</div>
+      <div class="card">
+        <div class="card-header">Step 3</div>
+        <div class="card-title">Re-Order Lockout</div>
+        <ul>
+          <li>Customer attempts replacement order.</li>
+          <li>System flags order as exceeding purchase limit &rarr; <strong>Auto-blocked</strong>.</li>
+          <li>Escalation to Frontline and Fraud Ops.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-number">03</div>
+  </div>
+
+  <!-- SLIDE 4 -->
+  <div class="slide-container">
+    <div class="slide-header">
+      <div class="slide-tag">Strategy &amp; Roadmap</div>
+      <div class="slide-title">Proposed NPI Mitigation &amp; Long-Term Architecture</div>
+      <div class="slide-subtitle">Balancing fraud/reseller risk controls with seamless customer purchasing</div>
+    </div>
+    <div class="grid-2">
+      <div class="card card-highlight">
+        <div class="card-header" style="color:var(--accent-blue)">Short-Term: Immediate NPI Levers</div>
+        <div class="card-title">Tactical Launch Execution</div>
+        <ul>
+          <li><strong>Temporary Quota Buffer:</strong> Raise allowed quantity limit per customer during launch ramp to absorb genuine re-orders.</li>
+          <li><strong>Rapid Clawback Sync:</strong> Run high-frequency daily reconciliation to restore cancelled units faster.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-header">Long-Term: Systematic Solution</div>
+        <div class="card-title">Scalable Architecture</div>
+        <ul>
+          <li><strong>Real-Time Event Clawback:</strong> Direct event-driven integration between OLSS cancellation and quota ledger.</li>
+          <li><strong>Risk-Based Quotas:</strong> Rules distinguishing trusted Apple IDs from high-risk reseller patterns.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-number">04</div>
+  </div>
+
+  <!-- SLIDE 5 -->
+  <div class="slide-container">
+    <div class="slide-header">
+      <div class="slide-tag">Governance &amp; Next Steps</div>
+      <div class="slide-title">Action Items &amp; Leadership Decisions</div>
+      <div class="slide-subtitle">Required alignments prior to NPI system configuration freeze</div>
+    </div>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="checkbox-box">1</div>
+        <div class="check-text">
+          <h4>Quota Buffer Approval</h4>
+          <p>Approve temporary per-customer limit increase (N &rarr; N+X) for high-demand NPI SKUs during launch.</p>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="checkbox-box">2</div>
+        <div class="check-text">
+          <h4>Clawback Operational Protocol</h4>
+          <p>Confirm business owner and monitoring schedule for daily OLSS cancellation reconciliation.</p>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="checkbox-box">3</div>
+        <div class="check-text">
+          <h4>Risk-Based Quota Framework Endorsement</h4>
+          <p>Align on long-term direction for real-time clawback and dynamic, risk-based quota rules.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-number">05</div>
+  </div>
+
+</body>
+</html>
