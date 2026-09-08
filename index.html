@@ -222,7 +222,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     padding: 24px;
   }
@@ -236,14 +235,19 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--text-secondary);
-    margin-bottom: 8px;
+    align-self: flex-start;
+  }
+  .stat-number-wrap {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .stat-number {
     font-size: 64px;
     font-weight: 800;
     line-height: 1;
     color: var(--text-primary);
-    margin: 10px 0;
   }
   .stat-card.card-highlight .stat-number {
     color: var(--accent-blue);
@@ -401,12 +405,12 @@
     <div class="grid-2">
       <div class="stat-card">
         <div class="card-header">1. Allowlist Requests</div>
-        <div class="stat-number">59</div>
+        <div class="stat-number-wrap"><div class="stat-number">59</div></div>
         <p>Total BOSS Allowlist requests received during the FY25 NPI period.</p>
       </div>
-      <div class="stat-card card-highlight">
+      <div class="stat-card">
         <div class="card-header">2. Genuine Customer Impact</div>
-        <div class="stat-number">47</div>
+        <div class="stat-number-wrap"><div class="stat-number">47</div></div>
         <p>80% of requests (47 of 59) were False Positives, confirmed as genuine customers &mdash; with each case triggering an email for the customer to place a new order.</p>
       </div>
     </div>
