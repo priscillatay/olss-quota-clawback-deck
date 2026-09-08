@@ -214,6 +214,47 @@
     flex: 1;
   }
 
+  /* Stat Card (hero metric cards, e.g. Slide 4) */
+  .stat-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .stat-card.card-highlight {
+    background: var(--accent-blue-bg);
+    border: 1px solid rgba(0,113,227,0.2);
+  }
+  .stat-card .card-header {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .stat-number {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-primary);
+    margin: 10px 0;
+  }
+  .stat-card.card-highlight .stat-number {
+    color: var(--accent-blue);
+  }
+  .stat-card p {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #333336;
+    max-width: 320px;
+  }
+
   /* Checklist */
   .checklist {
     display: flex;
@@ -357,20 +398,16 @@
       <div class="slide-title">Quantifying the Impact: Last Year's RPAC Data</div>
       <div class="slide-subtitle">BOSS Allowlist escalations during NPI &mdash; why the short-term fix matters</div>
     </div>
-    <div class="grid-2" style="align-items:stretch;">
-      <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:32px 24px; min-height:260px;">
+    <div class="grid-2">
+      <div class="stat-card">
         <div class="card-header">1. Allowlist Requests</div>
-        <div class="card-title" style="font-size:72px; font-weight:800; color:var(--text-primary); margin:14px 0; line-height:1;">59</div>
-        <ul style="list-style:none;">
-          <li style="padding-left:0;">Total BOSS Allowlist requests received during the FY25 NPI period.</li>
-        </ul>
+        <div class="stat-number">59</div>
+        <p>Total BOSS Allowlist requests received during the FY25 NPI period.</p>
       </div>
-      <div class="card card-highlight" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:32px 24px; min-height:260px;">
-        <div class="card-header" style="color:var(--accent-blue)">2. Genuine Customer Impact</div>
-        <div class="card-title" style="font-size:72px; font-weight:800; color:var(--accent-blue); margin:14px 0; line-height:1;">47</div>
-        <ul style="list-style:none;">
-          <li style="padding-left:0;">80% of requests (47 of 59) were False Positives, confirmed as genuine customers &mdash; with each case triggering an email for the customer to place a new order.</li>
-        </ul>
+      <div class="stat-card card-highlight">
+        <div class="card-header">2. Genuine Customer Impact</div>
+        <div class="stat-number">47</div>
+        <p>80% of requests (47 of 59) were False Positives, confirmed as genuine customers &mdash; with each case triggering an email for the customer to place a new order.</p>
       </div>
     </div>
     <div class="banner" style="margin-top:16px;">
